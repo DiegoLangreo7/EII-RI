@@ -30,3 +30,8 @@ Este repositorio contiene las prácticas y proyectos de la asignatura “Reposit
 /JPA/                           Proyectos de persistencia con JPA (Hibernate)
 /NoSQL (Cypher-Neo4j)/          Modelado y consultas en Neo4j
 /Information Retrieval/         Prácticas de recuperación de información
+```
+
+## Autor
+[Diego García González](https://github.com/DiegoLangreo7)
+
