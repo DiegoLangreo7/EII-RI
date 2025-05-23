@@ -1,0 +1,141 @@
+// Personajes
+CREATE (:Personaje {nombre: "Eren Jaeger", rango: "Soldado", edad: 19, nación: "Eldia"});
+CREATE (:Personaje {nombre: "Mikasa Ackerman", rango: "Soldado", edad: 19, nación: "Eldia"});
+CREATE (:Personaje {nombre: "Armin Arlert", rango: "Soldado", edad: 19, nación: "Eldia"});
+CREATE (:Personaje {nombre: "Levi Ackerman", rango: "Capitán", edad: 35, nación: "Eldia"});
+CREATE (:Personaje {nombre: "Reiner Braun", rango: "Guerrero", edad: 21, nación: "Marley"});
+CREATE (:Personaje {nombre: "Zeke Jaeger", rango: "Comandante", edad: 28, nación: "Marley"});
+CREATE (:Personaje {nombre: "Bertolt Hoover", rango: "Guerrero", edad: 16, nación: "Marley"});
+CREATE (:Personaje {nombre: "Annie Leonhart", rango: "Guerrero", edad: 20, nación: "Marley"});
+CREATE (:Personaje {nombre: "Jean Kirstein", rango: "Soldado", edad: 19, nación: "Eldia"});
+CREATE (:Personaje {nombre: "Lara Tybur", rango: "Guerrero", edad: 26, nación: "Marley"});
+CREATE (:Personaje {nombre: "Connie Springer", rango: "Soldado", edad: 18, nación: "Eldia"});
+CREATE (:Personaje {nombre: "Ymir", rango: "Guerrero", edad: 22, nación: "Eldia"});
+
+// Titanes
+CREATE (:Titán {tipo: "Titán de Ataque", tamaño: 15, poder: "Regeneración y fuerza de voluntad"});
+CREATE (:Titán {tipo: "Titán Colosal", tamaño: 60, poder: "Explosión térmica"});
+CREATE (:Titán {tipo: "Titán Acorazado", tamaño: 15, poder: "Piel endurecida"});
+CREATE (:Titán {tipo: "Titán Bestia", tamaño: 17, poder: "Lanzamiento de proyectiles"});
+CREATE (:Titán {tipo: "Titán Hembra", tamaño: 14, poder: "Agilidad superior y control de titanes"});
+CREATE (:Titán {tipo: "Titán Mandíbula", tamaño: 5, poder: "Velocidad y fuerza de mordida"});
+CREATE (:Titán {tipo: "Titán Martillo de Guerra", tamaño: 15, poder: "Fabricar armas y armadura"});
+CREATE (:Titán {tipo: "Titán Fundador", tamaño: 15, poder: "Controlar titanes"});
+
+// Regiones
+CREATE (:Región {nombre: "Shiganshina", tipo: "Distrito", descripción: "Pueblo natal de Eren"});
+CREATE (:Región {nombre: "Muro María", tipo: "Muro", descripción: "Primer muro defensivo"});
+CREATE (:Región {nombre: "Marley", tipo: "Nación", descripción: "Nación enemiga de Eldia"});
+CREATE (:Región {nombre: "Trost", tipo: "Distrito", descripción: "Región clave para Eldia en el muro María"});
+
+// Eventos
+CREATE (:Evento {nombre: "Caída de Shiganshina", fecha: "845", descripción: "Ataque inicial del Titán Colosal"});
+CREATE (:Evento {nombre: "Batalla contra Titán Bestia", fecha: "850", descripción: "Batalla por el sótano de Shiganshima"});
+CREATE (:Evento {nombre: "Liberación de Trost", fecha: "850", descripción: "Recuperación del distrito Trost"});
+CREATE (:Evento {nombre: "Batalla contra Titán Martillo", fecha: "854", descripción: "Primera ofensiva a Marley"});
+CREATE (:Evento {nombre: "Batalla contra Titán Hembra", fecha: "850", descripción: "Batalla contra una misteriosa titán"});
+
+// Relación: Aliado
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Personaje {nombre: "Mikasa Ackerman"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Personaje {nombre: "Armin Arlert"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Personaje {nombre: "Levi Ackerman"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Mikasa Ackerman"}), (b:Personaje {nombre: "Eren Jaeger"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Armin Arlert"}), (b:Personaje {nombre: "Eren Jaeger"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Levi Ackerman"}), (b:Personaje {nombre: "Eren Jaeger"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Reiner Braun"}), (b:Personaje {nombre: "Bertolt Hoover"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Bertolt Hoover"}), (b:Personaje {nombre: "Reiner Braun"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Reiner Braun"}), (b:Personaje {nombre: "Annie Leonhart"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Jean Kirstein"}), (b:Personaje {nombre: "Connie Springer"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Connie Springer"}), (b:Personaje {nombre: "Jean Kirstein"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Mikasa Ackerman"}), (b:Personaje {nombre: "Levi Ackerman"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Levi Ackerman"}), (b:Personaje {nombre: "Mikasa Ackerman"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Mikasa Ackerman"}), (b:Personaje {nombre: "Armin Arlert"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Armin Arlert"}), (b:Personaje {nombre: "Mikasa Ackerman"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Bertolt Hoover"}), (b:Personaje {nombre: "Annie Leonhart"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Annie Leonhart"}), (b:Personaje {nombre: "Bertolt Hoover"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Zeke Jaeger"}), (b:Personaje {nombre: "Reiner Braun"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Zeke Jaeger"}), (b:Personaje {nombre: "Bertolt Hoover"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Zeke Jaeger"}), (b:Personaje {nombre: "Annie Leonhart"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Zeke Jaeger"}), (b:Personaje {nombre: "Lara Tybur"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Lara Tybur"}), (b:Personaje {nombre: "Zeke Jaeger"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Reiner Braun"}), (b:Personaje {nombre: "Zeke Jaeger"}) CREATE (a)-[:ALIADO_DE]->(b);
+MATCH (a:Personaje {nombre: "Bertolt Hoover"}), (b:Personaje {nombre: "Zeke Jaeger"}) CREATE (a)-[:ALIADO_DE]->(b);
+
+// Relación: Transformación
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Titán {tipo: "Titán de Ataque"}) CREATE (a)-[:SE_TRANSFORMA_EN]->(b);
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Titán {tipo: "Titán Martillo de Guerra"}) CREATE (a)-[:SE_TRANSFORMA_EN]->(b);
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Titán {tipo: "Titán Fundador"}) CREATE (a)-[:SE_TRANSFORMA_EN]->(b);
+MATCH (a:Personaje {nombre: "Reiner Braun"}), (b:Titán {tipo: "Titán Acorazado"}) CREATE (a)-[:SE_TRANSFORMA_EN]->(b);
+MATCH (a:Personaje {nombre: "Zeke Jaeger"}), (b:Titán {tipo: "Titán Bestia"}) CREATE (a)-[:SE_TRANSFORMA_EN]->(b);
+MATCH (a:Personaje {nombre: "Annie Leonhart"}), (b:Titán {tipo: "Titán Hembra"}) CREATE (a)-[:SE_TRANSFORMA_EN]->(b);
+MATCH (a:Personaje {nombre: "Ymir"}), (b:Titán {tipo: "Titán Mandíbula"}) CREATE (a)-[:SE_TRANSFORMA_EN]->(b);
+MATCH (a:Personaje {nombre: "Armin Arlert"}), (b:Titán {tipo: "Titán Colosal"}) CREATE (a)-[:SE_TRANSFORMA_EN]->(b);
+MATCH (a:Personaje {nombre: "Bertolt Hoover"}), (b:Titán {tipo: "Titán Colosal"}) CREATE (a)-[:SE_TRANSFORMA_EN]->(b);
+MATCH (a:Personaje {nombre: "Lara Tybur"}), (b:Titán {tipo: "Titán Martillo de Guerra"}) CREATE (a)-[:SE_TRANSFORMA_EN]->(b);
+
+// Relación: Ubicación (Ajustada a eventos)
+MATCH (a:Evento {nombre: "Caída de Shiganshina"}), (b:Región {nombre: "Shiganshina"}) CREATE (a)-[:SUCEDIÓ_EN]->(b);
+MATCH (a:Evento {nombre: "Liberación de Trost"}), (b:Región {nombre: "Trost"}) CREATE (a)-[:SUCEDIÓ_EN]->(b);
+MATCH (a:Evento {nombre: "Batalla contra Titán Bestia"}), (b:Región {nombre: "Shiganshina"}) CREATE (a)-[:SUCEDIÓ_EN]->(b);
+MATCH (a:Evento {nombre: "Batalla contra Titán Martillo"}), (b:Región {nombre: "Marley"}) CREATE (a)-[:SUCEDIÓ_EN]->(b);
+MATCH (a:Evento {nombre: "Batalla contra Titán Hembra"}), (b:Región {nombre: "Muro María"}) CREATE (a)-[:SUCEDIÓ_EN]->(b);
+
+// Relación: Participación
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Evento {nombre: "Caída de Shiganshina"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Mikasa Ackerman"}), (b:Evento {nombre: "Caída de Shiganshina"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Armin Arlert"}), (b:Evento {nombre: "Caída de Shiganshina"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Reiner Braun"}), (b:Evento {nombre: "Caída de Shiganshina"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Bertolt Hoover"}), (b:Evento {nombre: "Caída de Shiganshina"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Evento {nombre: "Liberación de Trost"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Mikasa Ackerman"}), (b:Evento {nombre: "Liberación de Trost"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Armin Arlert"}), (b:Evento {nombre: "Liberación de Trost"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Reiner Braun"}), (b:Evento {nombre: "Liberación de Trost"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Bertolt Hoover"}), (b:Evento {nombre: "Liberación de Trost"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Annie Leonhart"}), (b:Evento {nombre: "Liberación de Trost"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Jean Kirstein"}), (b:Evento {nombre: "Liberación de Trost"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Connie Springer"}), (b:Evento {nombre: "Liberación de Trost"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Ymir"}), (b:Evento {nombre: "Liberación de Trost"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Zeke Jaeger"}), (b:Evento {nombre: "Batalla contra Titán Bestia"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Levi Ackerman"}), (b:Evento {nombre: "Batalla contra Titán Bestia"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Evento {nombre: "Batalla contra Titán Bestia"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Evento {nombre: "Batalla contra Titán Martillo"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Mikasa Ackerman"}), (b:Evento {nombre: "Batalla contra Titán Martillo"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Lara Tybur"}), (b:Evento {nombre: "Batalla contra Titán Martillo"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Eren Jaeger"}), (b:Evento {nombre: "Batalla contra Titán Hembra"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+MATCH (a:Personaje {nombre: "Annie Leonhart"}), (b:Evento {nombre: "Batalla contra Titán Hembra"}) CREATE (a)-[:PARTICIPÓ_EN]->(b);
+
+
+//CONSULTAS 
+//elementales:
+
+//[Dame todos los personajes que se puedan transformar en titan]
+MATCH (p:Personaje)-[:SE_TRANSFORMA_EN]->(t:Titán) RETURN p.nombre AS Nombre, t.tipo AS Titán;
+
+//[Dame todos los personajes que sean de fuera de la isla de paradise]
+MATCH (p:Personaje) WHERE p.nación <> "Eldia" RETURN p.nombre AS Nombre, p.nación AS Nación;
+
+
+//intermedias:
+
+//[Dame todos los personajes que hayan participado en un evento, a excepción de los marlianos]
+MATCH (p:Personaje)-[:PARTICIPÓ_EN]->(:Evento) WHERE p.nación <> "Marley" RETURN DISTINCT p.nombre AS Nombre, p.nación AS Nación;
+
+//[Dame los personajes a excepción de los que sean titan que hayan participado en eventos]
+MATCH (p:Personaje)-[:PARTICIPÓ_EN]->(:Evento) WHERE NOT (p)-[:SE_TRANSFORMA_EN]->(:Titán) RETURN DISTINCT p.nombre AS Nombre;
+
+
+//avanzadas:
+
+//[El camino mas corto entre Levi Ackerman y Lara Tybur]
+MATCH p = shortestPath((a:Personaje {nombre: "Levi Ackerman"})-[:ALIADO_DE|PARTICIPÓ_EN*..5]-(b:Personaje {nombre: "Lara Tybur"}))
+RETURN 
+    [n IN nodes(p) | n.nombre] AS Nodos, 
+    [r IN relationships(p) | type(r)] AS Relaciones;
+
+//[Busca personajes que hayan participado en todos los eventos de la base de datos]
+MATCH (e:Evento)
+WITH COLLECT(DISTINCT e) AS todosEventos
+MATCH (p:Personaje)-[:PARTICIPÓ_EN]->(e:Evento)
+WITH p, todosEventos, COLLECT(DISTINCT e) AS eventosParticipados
+WHERE size(eventosParticipados) = size(todosEventos)
+RETURN DISTINCT p.nombre AS Nombre;

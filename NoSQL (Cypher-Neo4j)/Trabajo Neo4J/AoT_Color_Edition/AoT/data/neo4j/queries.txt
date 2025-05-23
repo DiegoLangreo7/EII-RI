@@ -1,0 +1,33 @@
+elementales:
+
+[Dame todos los personajes que se puedan transformar en titan]
+MATCH (p:Personaje)-[:SE_TRANSFORMA_EN]->(t:Titán) RETURN p.nombre AS Nombre, t.tipo AS Titán;
+
+[Dame todos los personajes que sean de fuera de la isla de paradise]
+MATCH (p:Personaje) WHERE p.nación <> "Eldia" RETURN p.nombre AS Nombre, p.nación AS Nación;
+
+
+intermedias:
+
+[Dame todos los personajes que hayan participado en un evento, a excepción de los marlianos]
+MATCH (p:Personaje)-[:PARTICIPÓ_EN]->(:Evento) WHERE p.nación <> "Marley" RETURN DISTINCT p.nombre AS Nombre, p.nación AS Nación;
+
+[Dame los personajes a excepción de los que sean titan que hayan participado en eventos]
+MATCH (p:Personaje)-[:PARTICIPÓ_EN]->(:Evento) WHERE NOT (p)-[:SE_TRANSFORMA_EN]->(:Titán) RETURN DISTINCT p.nombre AS Nombre;
+
+
+avanzadas:
+
+[El camino mas corto entre Levi Ackerman y Lara Tybur]
+MATCH p = shortestPath((a:Personaje {nombre: "Levi Ackerman"})-[:ALIADO_DE|PARTICIPÓ_EN*..5]-(b:Personaje {nombre: "Lara Tybur"}))
+RETURN 
+    [n IN nodes(p) | n.nombre] AS Nodos, 
+    [r IN relationships(p) | type(r)] AS Relaciones;
+
+[Busca personajes que hayan participado en todos los eventos de la base de datos]
+MATCH (e:Evento)
+WITH COLLECT(DISTINCT e) AS todosEventos
+MATCH (p:Personaje)-[:PARTICIPÓ_EN]->(e:Evento)
+WITH p, todosEventos, COLLECT(DISTINCT e) AS eventosParticipados
+WHERE size(eventosParticipados) = size(todosEventos)
+RETURN DISTINCT p.nombre AS Nombre;
