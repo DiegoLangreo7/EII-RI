@@ -16,6 +16,7 @@ Este repositorio contiene las prácticas y proyectos de la asignatura “Reposit
 
 - **NoSQL (Cypher-Neo4j)**  
   Modelado de grafos y consultas en Neo4j usando el lenguaje Cypher.
+  (Desarrollo grupal)
 
 - **Information Retrieval**  
   Técnicas de indexación y recuperación de información sobre colecciones de texto.
